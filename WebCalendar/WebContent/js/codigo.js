@@ -7,19 +7,23 @@ $("#ocultacalendarios").click(ocultacalendarios);
 $(".calendariocol").click(function(){$(this).toggleClass("gris");})
 $(".calendariocol").click(togglecalendarios)
 	$("#anonimo").click(function(){$(".evento").css("background","black");$(".motivoevento").text("");$(".evento").css("color","white");})
-	$("#anonimo2").click(function(){$(".motivoevento").text("");})
-	$("#nuevoevento").hide()
-	$(".dia").click(muestra)
+	$("#anonimo2").click(function(){$(".motivoevento").text("");});
+	$("#nuevoevento").hide();
+	$(".dia").click(muestra);
+	$("#buttonAddCal").click(muestraCal);
 	//$(".eliminar").hide();
 	//$(".dia").hover(muestraeliminar)
 	$(".evento").draggable();
 	$( ".dia" ).droppable({
 	      drop: function( event, ui ) {
-	        $("#ajax").load("cambia.jsp?anio="+ui.draggable.attr("anio")+"&mes="+ui.draggable.attr("mes")+"&dia="+ui.draggable.attr("dia")+"&hora="+ui.draggable.attr("hora")+"&nuevodia="+$(this).attr("dia"))
-	      	setTimeout(function(){window.location="?"},1000);
+	        $("#ajax").load("acciones/cambia.jsp?idevento="+ui.draggable.attr("idevento")+"&nuevodia="+$(this).attr("dia"));
+	        console.log('El evento que vas a mover es: ' + ui.draggable.attr("idevento"));
+	        console.log('El dia al que lo vas a mover es: ' + $(this).attr("dia"));
+	      	setTimeout(function(){window.location="?";},1000);
 	      }
 	    });
-	    $("#cerrarnuevoevento").click(cierra)
+	    $("#cerrarnuevoevento").click(cierra);
+	    $("#closeNewCal").click(closeNewCal);
 }
 function ocultacalendarios(){
 	if(calendariosocultos == 1){
@@ -42,16 +46,28 @@ function togglecalendarios(){
 	}
 }
 function muestra(){
-	$("#calendario").addClass("difuminado")
-	$("#nuevoevento").fadeIn()
-	var dia = $(this).attr("id")
-	var numdia = $(this).attr("dia")
+	$("#calendario").addClass("difuminado");
+	$("#nuevoevento").fadeIn();
+	var dia = $(this).attr("id");
+	var numdia = $(this).attr("dia");
 	$("#dimedia").val(numdia);
-	$("#nuevoevento").append('<input type="hidden" name="dia" value="'+dia+'">')
+	$("#nuevoevento").append('<input type="hidden" name="dia" value="'+dia+'">');
+}
+function muestraCal(){
+	$("#calendario").addClass("difuminado");
+	$("#newCalForm").fadeIn();
+	/*var dia = $(this).attr("id");
+	var numdia = $(this).attr("dia");
+	$("#dimedia").val(numdia);
+	$("#nuevoevento").append('<input type="hidden" name="dia" value="'+dia+'">');*/
 }
 function cierra(){
-	$("#calendario").removeClass("difuminado")
-	$("#nuevoevento").fadeOut()
+	$("#calendario").removeClass("difuminado");
+	$("#nuevoevento").fadeOut();
+}
+function closeNewCal(){
+	$("#calendario").removeClass("difuminado");
+	$("#newCalForm").fadeOut();
 }
 function muestraeliminar(){
 	

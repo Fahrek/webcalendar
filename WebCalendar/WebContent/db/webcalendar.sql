@@ -28,6 +28,8 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `calendarios`
 --
 
+CREATE DATABASE webcalendar;
+
 CREATE TABLE `calendarios` (
   `idcalendario` int(20) NOT NULL,
   `usuario` int(10) NOT NULL,
